@@ -1,8 +1,7 @@
-import db from "../config/connection.js";
-import Question from "../models/Question.js";
-import cleanDB from "./cleanDb.js";
-
-import pythonQuestions from './pythonQuestions.json' assert { type: "json" };
+const db = require("../config/connection.js");
+const Question = require("../models/Question.js");
+const cleanDB = require("./cleanDb.js");
+const pythonQuestions = require('./pythonQuestions.json');
 
 db.once('open', async () => {
   await cleanDB('Question', 'questions');
