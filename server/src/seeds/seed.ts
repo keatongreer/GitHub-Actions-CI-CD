@@ -11,7 +11,7 @@ async function loadJson(filePath) {
 db.once('open', async () => {
   await cleanDB('Question', 'questions');
 
-  const pythonQuestions = await loadJson(new URL('./pythonQuestions.json', import.meta.url).pathname);
+  const pythonQuestions = await loadJson(new URL('../../src/seeds/pythonQuestions.json', import.meta.url).pathname);
 
   await Question.insertMany(pythonQuestions);
 
