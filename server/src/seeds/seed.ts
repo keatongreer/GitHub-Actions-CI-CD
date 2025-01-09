@@ -1,11 +1,17 @@
+import fs from 'fs/promises';
 import db from "../config/connection.js";
 import Question from "../models/Question.js";
 import cleanDB from "./cleanDb.js";
 
-import pythonQuestions from './pythonQuestions.json' assert { type: "json" };
+async function loadJson(filePath) {
+  const data = await fs.readFile(filePath, 'utf-8');
+  return JSON.parse(data);
+}
 
 db.once('open', async () => {
   await cleanDB('Question', 'questions');
+
+  const pythonQuestions = await loadJson(new URL('./pythonQuestions.json', import.meta.url).pathname);
 
   await Question.insertMany(pythonQuestions);
 
